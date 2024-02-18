@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.http import HttpResponse
+from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 
 # Define the signup_list globally
@@ -27,7 +30,7 @@ def signup_view(request):
         # Redirect to a success page after signup
         return redirect('signup_success')
     else:
-        return render(request, 'signup.html')
+        return render(request, 'signupx.html')
 
 
 def login_view(request):
@@ -64,3 +67,12 @@ def my_view(request):
         'message': 'project is working properly'
     }
     return HttpResponse(JsonResponse(data))
+
+
+
+
+# Starting of api part 
+
+@api_view(['GET'])
+def getData(request):
+    return Response()
