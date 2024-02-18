@@ -5,10 +5,17 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 # Define the signup_list globally
 signup_list = []
+
+
+
+@login_required(login_url='home')
+def HomePage(request):
+    return render (request,'home.html')
 
 def signup_view(request):
     if request.method == 'POST':
@@ -30,7 +37,7 @@ def signup_view(request):
         # Redirect to a success page after signup
         return redirect('signup_success')
     else:
-        return render(request, 'signupx.html')
+        return render(request, 'signup.html')
 
 
 def login_view(request):
@@ -75,4 +82,4 @@ def my_view(request):
 
 @api_view(['GET'])
 def getData(request):
-    return Response()
+    return render(request,'home.html')
