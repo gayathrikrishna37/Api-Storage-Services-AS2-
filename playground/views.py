@@ -7,7 +7,10 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-
+from playground.models import SignupData
+from django.contrib.auth.hashers import make_password, check_password
+from playground.pages import uuid
+from django.contrib.auth.models import User
 # Define the signup_list globally
 signup_list = []
 
@@ -20,17 +23,23 @@ def HomePage(request):
 def signup_view(request):
     if request.method == 'POST':
         # Process signup form submission
-        username = request.POST.get('username')
+        usrname = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        
+        # Hash the password
+        hashed_password = make_password(password)
+        User.objects.create(username=usrname,password=hashed_password)
 
         # Store signup data in a dictionary
-        signup_data = {
-            'username': username,
-            'email': email,
-            'password': password
-        }
-        print(signup_data)
+        signup_data = SignupData.objects.create(
+            user_id = 212,
+            username=usrname,
+            email=email,
+            password=hashed_password
+        )
+
+        
         # Append signup data to the global signup_list
         signup_list.append(signup_data)
 
@@ -46,11 +55,11 @@ def login_view(request):
         password = request.POST.get('password')
 
         # Authenticate user
-        user = authenticate(username=username, password=password)
+        login_user = authenticate(username='user', password='user_password_attempted')
 
-        if user is not None:
+        if login_user is not None:
             # User is authenticated
-            login(request, user)
+            print('Authentication successful')
             # Redirect to a success page
             return redirect('dashboard')  # Change 'dashboard' to your desired URL
         else:
@@ -58,6 +67,7 @@ def login_view(request):
             return render(request, 'login.html', {'error_message': 'Invalid username or password'})
     else:
         # GET request, render the login page
+        print('Authentication failed')
         return render(request, 'login.html')
     
     
