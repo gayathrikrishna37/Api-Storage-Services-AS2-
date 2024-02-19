@@ -7,10 +7,12 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from playground.models import SignupData
+from playground.models import SignupData, AS2_bucket_db,AS2_user, sessions, DataModel
 from django.contrib.auth.hashers import make_password, check_password
 from playground.pages import uuid
 from django.contrib.auth.models import User
+from datetime import date, datetime
+
 # Define the signup_list globally
 signup_list = []
 
@@ -33,7 +35,7 @@ def signup_view(request):
 
         # Store signup data in a dictionary
         signup_data = SignupData.objects.create(
-            user_id = 212,
+            user_id = f"{usrname}-{email}-{datetime.now().timestamp()}"
             username=usrname,
             email=email,
             password=hashed_password
@@ -47,6 +49,9 @@ def signup_view(request):
         return redirect('signup_success')
     else:
         return render(request, 'signup.html')
+def bucket_info(request):
+        bucket_name = request.POST.get('bucketname')
+        bucketID = f"{bucket_name}-{}-{datetime.now().timestamp()}",
 
 
 def login_view(request):
