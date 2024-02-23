@@ -16,7 +16,7 @@ from datetime import date, datetime
 # Define the signup_list globally
 signup_list = []
 
-
+now =  datetime.now()
 
 @login_required(login_url='home')
 def HomePage(request):
@@ -35,7 +35,7 @@ def signup_view(request):
 
         # Store signup data in a dictionary
         signup_data = SignupData.objects.create(
-            user_id = f"{usrname}-{email}-{datetime.now().timestamp()}"
+            # user_id = f"{usrname}-{email}-{datetime.now().timestamp()}"
             username=usrname,
             email=email,
             password=hashed_password
@@ -51,7 +51,9 @@ def signup_view(request):
         return render(request, 'signup.html')
 def bucket_info(request):
         bucket_name = request.POST.get('bucketname')
-        bucketID = f"{bucket_name}-{}-{datetime.now().timestamp()}",
+        # bucketID = 25
+        # creation_date = datetime.date
+        
 
 
 def login_view(request):
@@ -76,15 +78,13 @@ def login_view(request):
         return render(request, 'login.html')
     
     
-def dashboard_view(request):
-    if request.user.is_authenticated:
-        return render(request, 'dashboard.html')
-    else:
-        return redirect('login')
-    
-    
     
 def my_view(request):
+    form = SignupData.objects.all()
+    for data in form:
+        print(data.username,
+              data.password,
+              data.email,)
     data = {
         'message': 'project is working properly'
     }

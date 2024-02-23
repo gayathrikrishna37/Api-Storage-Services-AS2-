@@ -1,0 +1,20 @@
+{% extends 'accounts/layouts/maintemp.html' %}
+
+{% block title %}
+All Students
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>All Students </h1>
+            {% for data in form %}
+                {{data.name}}
+                {{data.email}}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
