@@ -34,3 +34,7 @@ class  sessions(models.Model):
     active = models.BooleanField(default=False)
 
 
+
+
+
+hai

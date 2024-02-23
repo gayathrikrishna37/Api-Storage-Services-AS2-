@@ -12,7 +12,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from playground.pages import uuid
 from django.contrib.auth.models import User
 from datetime import date, datetime
-
+from api import api_get_request,
 # Define the signup_list globally
 signup_list = []
 

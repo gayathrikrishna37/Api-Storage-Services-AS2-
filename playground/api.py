@@ -12,9 +12,10 @@ from django.contrib.auth.hashers import make_password, check_password
 from playground.pages import uuid
 from django.contrib.auth.models import User
 from datetime import date, datetime
-
+# from file_name import function_name 
 
 
 
 def api_get_request(request, userid, bucketid):
+    print('hello')
     
