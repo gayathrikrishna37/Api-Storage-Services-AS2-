@@ -83,8 +83,8 @@ def dashboard(request):
 
     return render(request, 'crm/dashboard.html')
 
-
-
+def bucket_view(request):
+    return render(request, 'crm/bucket.html')
 
 
 
