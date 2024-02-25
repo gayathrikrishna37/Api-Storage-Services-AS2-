@@ -12,7 +12,11 @@ from django.contrib.auth.hashers import make_password, check_password
 from playground.pages import uuid
 from django.contrib.auth.models import User
 from datetime import date, datetime
-from api import api_get_request,
+from api import api_get_request
+
+
+from .models import UserData
+
 # Define the signup_list globally
 signup_list = []
 
@@ -98,3 +102,16 @@ def my_view(request):
 @api_view(['GET'])
 def getData(request):
     return render(request,'home.html')
+
+
+def get_user_data(request, userid, bucketid):
+    try:
+        user_data = UserData.objects.get(userid=userid, bucketid=bucketid)
+        data = {
+            'userid': user_data.userid,
+            'bucketid': user_data.bucketid,
+            'data': user_data.data
+        }
+        return JsonResponse(data)
+    except UserData.DoesNotExist:
+        return JsonResponse({'error': 'User data not found'}, status=404)

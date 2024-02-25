@@ -34,7 +34,13 @@ class  sessions(models.Model):
     active = models.BooleanField(default=False)
 
 
+class UserData(models.Model):
+    userid = models.IntegerField()
+    bucketid = models.IntegerField()
+    data = models.TextField()
+
+    def __str__(self):
+        return f"User {self.userid}, Bucket {self.bucketid}"
 
 
 
-hai

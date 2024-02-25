@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bucket Management</title>
+	<link rel="stylesheet" type="text/css" href="gui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+	<div class="container">
+        <div class="box">
+            <h2>Account Snapshot <button class="edit-button">Edit <i class="fas fa-pencil-alt"></i></button></h2>
+            <hr>
+            <p>AccountID: xyz <span style="margin-right: 200px;"></span> Username: xyz <span style="margin-right: 200px;"></span> Email address: xyz@gmail.com <span style="margin-right: 200px;"></span> Password: xyz</p>
+
+        </div>
+    </div>
+    
+        <div class="box">
+            <h3>General purpose buckets <button class="create-bucket-button">Create Bucket</button></h3>
+            <div class="search-container">
+                <input type="text" placeholder="Search by bucket name" class="search-input">
+                <i class="fa fa-search search-icon"></i>
+            </div>
+            <table id="bucketsTable">
+                    <tr>
+                        <th>Name</th>
+                        <th>Creation Date</th>
+                        <th>Last Updated</th>
+                        <th>Access</th>
+                        <th>Data</th>
+                    </tr>
+                
+            </table>
+        </div>
+    </div>
+    
+	<script src="gui.js"></script>
+</body>
+</html>

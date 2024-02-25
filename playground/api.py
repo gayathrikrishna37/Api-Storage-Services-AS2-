@@ -13,7 +13,7 @@ from playground.pages import uuid
 from django.contrib.auth.models import User
 from datetime import date, datetime
 # from file_name import function_name 
-
+from views.py import get_user_data
 
 
 def api_get_request(request, userid, bucketid):
