@@ -36,3 +36,10 @@ class  sessions(models.Model):
 
 
 
+class UserData(models.Model):
+    userid = models.IntegerField()
+    bucketid = models.IntegerField()
+    data = models.TextField()
+
+    def __str__(self):
+        return f"User {self.userid}, Bucket {self.bucketid}"
