@@ -61,6 +61,7 @@ def my_login(request):
             if user is not None:
 
                 auth.login(request, user)
+                user_Credentials(request)
 
                 return redirect("dashboard")
 
@@ -88,4 +89,7 @@ def bucket_view(request):
 
 
 
-
+def user_Credentials(request):
+    user_id = request.user.id
+    usename = request.user.username
+    email = request.user.email
