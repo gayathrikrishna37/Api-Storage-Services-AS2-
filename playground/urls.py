@@ -16,6 +16,8 @@ urlpatterns = [
     
     path('bucket/', views.bucket_view, name='bucket-page'),
     
+    path('api/user/<int:userid>/bucket/<int:bucketid>/', views.post_user_data, name='post_user_data'),
+    
 ]
 
 
