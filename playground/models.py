@@ -23,7 +23,7 @@ class AS2_bucket_db(models.Model):
     data = models.ForeignKey(DataModel, on_delete=models.CASCADE)
     
 class SignupData(models.Model):
-    # user_id = models.TextField(max_length=500)
+    user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     password = models.CharField(max_length=500)
@@ -36,5 +36,3 @@ class  sessions(models.Model):
 
 
 
-
-hai

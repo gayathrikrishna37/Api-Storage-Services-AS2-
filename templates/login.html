@@ -4,7 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
-    <link rel="stylesheet" href="stylelog.css">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #fff;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px; /* Adjusted width */
+            background-color: #1e1d1d;
+            padding: 30px 70px;
+            border-radius: 5px;
+            text-align: center; /* Centering content */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .input-field {
+            margin-bottom: 10px;
+            text-align: left; /* Reset text-align for form elements */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left; /* Reset text-align for labels */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            background-color: #666; 
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e6dfdf;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Adjust margin for spacing */
+            margin-left: auto; /* Center the button horizontally */
+            margin-right: auto;
+        }
+
+        button:hover {
+            background-color: #449d44;
+        }
+
+        a {
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -19,9 +84,10 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit">Login</button>
-            <p>Don't have an account? <a href="#">Sign Up Here</a></p>
+            <p> Don't have an account 
+                <a href="{% url 'signup' %}" >Signup </a>
+            </p>
         </form>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>

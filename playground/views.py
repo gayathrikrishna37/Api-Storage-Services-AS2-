@@ -11,8 +11,9 @@ from playground.models import SignupData, AS2_bucket_db,AS2_user, sessions, Data
 from django.contrib.auth.hashers import make_password, check_password
 from playground.pages import uuid
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
 from datetime import date, datetime
-from api import api_get_request,
+from playground.api import api_get_request
 # Define the signup_list globally
 signup_list = []
 
@@ -22,33 +23,37 @@ now =  datetime.now()
 def HomePage(request):
     return render (request,'home.html')
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import make_password
+from .models import SignupData
+
 def signup_view(request):
     if request.method == 'POST':
         # Process signup form submission
-        usrname = request.POST.get('username')
+        username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
         
+        # Check if username or email already exists
+        if SignupData.objects.filter(username=username).exists() or SignupData.objects.filter(email=email).exists():
+            # Handle case where username or email already exists
+            return render(request, 'signup.html', {'error_message': 'Username or email already exists.'})
+        
         # Hash the password
         hashed_password = make_password(password)
-        User.objects.create(username=usrname,password=hashed_password)
 
-        # Store signup data in a dictionary
+        # Create and save new user
         signup_data = SignupData.objects.create(
-            # user_id = f"{usrname}-{email}-{datetime.now().timestamp()}"
-            username=usrname,
+            username=username,
             email=email,
             password=hashed_password
         )
 
-        
-        # Append signup data to the global signup_list
-        signup_list.append(signup_data)
-
-        # Redirect to a success page after signup
-        return redirect('signup_success')
+        # Redirect to login page after successful signup
+        return redirect('login')  # Assuming 'login' is the URL name for your login page
     else:
         return render(request, 'signup.html')
+
 def bucket_info(request):
         bucket_name = request.POST.get('bucketname')
         # bucketID = 25
