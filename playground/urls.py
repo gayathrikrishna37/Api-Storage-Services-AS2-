@@ -14,6 +14,8 @@ urlpatterns = [
 
     path('user-logout', views.user_logout, name="user-logout"),
     
+    path('bucket/', views.bucket_view, name='bucket-page'),
+    
 ]
 
 
